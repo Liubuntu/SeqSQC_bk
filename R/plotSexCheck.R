@@ -4,8 +4,9 @@ plotSexCheck <- function(res.qc, interactive=FALSE){
         res.qc <- res.qc[res.qc$sex != "", ]
     }
     res.pop.ord <- res.qc
-    prob.ind <- res.pop.ord$sex == "female" & res.pop.ord$pred.sex == "male" |
-        res.pop.ord$sex == "male" & res.pop.ord$pred.sex == "female"
+    res.pop.ord$sex <- sub("^female", "Female", sub("^male", "Male", res.pop.ord$sex))
+    prob.ind <- res.pop.ord$sex == "Female" & res.pop.ord$pred.sex == "Male" |
+        res.pop.ord$sex == "Male" & res.pop.ord$pred.sex == "Female"
     prob.sex <- res.pop.ord[prob.ind, ]
     
     if(interactive){
